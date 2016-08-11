@@ -15,8 +15,62 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 app.post('/songs', function (req, res) {
   var song = req.body;
-  songs.push(song);
-  res.sendStatus(200);
+  var songTitle = req.body.title.toLowerCase();
+  var songArtist = req.body.artist.toLowerCase();
+
+  var month = new Array();
+  month[0] = "January";
+  month[1] = "February";
+  month[2] = "March";
+  month[3] = "April";
+  month[4] = "May";
+  month[5] = "June";
+  month[6] = "July";
+  month[7] = "August";
+  month[8] = "September";
+  month[9] = "October";
+  month[10] = "November";
+  month[11] = "December";
+
+  var today = new Date();
+  var todaysMonth = month[today.getMonth()];
+  var todaysYear = today.getFullYear();
+  var todaysDay = today.getDate();
+
+  song.dateAdded = todaysMonth + " " + todaysDay + ", " + todaysYear;
+  console.log('song', song);
+
+  var duplicateCounter = 0;
+
+  if (songTitle === "") {
+    res.sendStatus(400);
+  } else if(songArtist === "") {
+    res.sendStatus(400);
+  } else if (songs.length === 0) {
+      songs.push(song);
+      res.sendStatus(200);
+  } else {
+    songs.forEach(function(songInArray, i) {
+      duplicateCounter = 0;
+      if (songTitle === songInArray.title.toLowerCase()) {
+        duplicateCounter++;
+        res.sendStatus(400);
+      }
+    });
+    if (duplicateCounter === 0) {
+      songs.push(song);
+      res.sendStatus(200);
+    }
+  }
+
+
+  console.log('songs uno', songs);
+
+  // songs.push(song);
+  // res.sendStatus(200);
+
+  // res.end();
+
 });
 
 app.get('/songs', function (req, res) {

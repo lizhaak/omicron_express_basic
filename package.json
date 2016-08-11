@@ -12,5 +12,13 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizhaak/omicron_express_basic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lizhaak/omicron_express_basic/issues"
+  },
+  "homepage": "https://github.com/lizhaak/omicron_express_basic#readme"
 }

@@ -27,6 +27,7 @@ $(document).ready(function () {
 
       error: function (response) {
         console.log('Attempted POST /songs, did not work');
+        alert('Make sure to enter a song title and artist and do not repeat yourself');
       }
     });
   });
@@ -37,8 +38,10 @@ function getSongs() {
     url: '/songs',
     success: function (songs) {
       $('#song-list').empty();
+      console.log('songs', songs);
       songs.forEach(function (song) {
-        $('#song-list').append('<div>' + song.title + '-' + song.artist + '</div>');
+        $('#song-list').append('<div>' + song.title + ' - ' + song.artist + '  // ' + song.dateAdded +'</div>');
+        console.log('song', song);
       });
     },
 
